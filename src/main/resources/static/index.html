@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Starix的在线聊天系统</title>
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="css/zui.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/fy-alert.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <script src="js/zui.min.js"></script>
+    <script src="js/fy-alert.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+<body>
+
+<div style="width: 1000px;margin: 0 auto;text-align: center">
+    <h2>Starix的在线聊天系统</h2>
+    <hr>
+    <div style="margin: 10px 10px">
+        <span class="label label-badge label-success label-outline">用户名:<span id="username-label">在思考的🐱</span></span>
+        <span class="label label-badge label-success label-outline">ID:<span
+                id="uid-label">1203555970559541250</span></span>
+        <span class="label label-danger" style="cursor: pointer" id="exit">退出</span>
+    </div>
+    <ul class="nav nav-primary nav-justified" style="margin-bottom: 10px">
+        <li id="index" class="active"><a href="javascript:void(0);">主页</a></li>
+        <li id="single-chat"><a href="javascript:void(0);">一对一单聊</a></li>
+        <li id="room-chat"><a href="javascript:void(0);">多对多聊天室</a></li>
+        <li id="call"><a href="javascript:void(0);">呼叫</a></li>
+    </ul>
+</div>
+
+
+<div class="panel panel-info" style="width: 1000px;margin: 0 auto" id="index-panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">主页</h3>
+    </div>
+    <div class="panel-body" style="text-align: center">
+        <div style="margin-bottom: 30px;margin-top: 10px">在线用户列表</div>
+        <table class="table table-hover table-fixed" style="text-align: left">
+            <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>用户名</th>
+                <th>上线时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="user-list">
+            <!--<tr>-->
+            <!--<td>484864864</td>-->
+            <!--<td>帅鸽</td>-->
+            <!--<td>-->
+            <!--<button class="btn btn-info" type="button">加好友</button>-->
+            <!--</td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+        <div style="text-align: center;margin-top: 20px;margin-bottom: 20px;color: red;display: none" id="no-user">
+            没有在线用户
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-info" style="width: 1000px;margin: 0 auto;display: none" id="single-chat-panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">一对一单聊</h3>
+    </div>
+
+    <div class="panel-body" style="text-align: center">
+        <span class="label" style="margin-left: 100px;" id="chat-title">左侧选择用户进行聊天</span>
+        <div style="text-align: left;margin-top: 5px;">
+            <div class="list-group" style="width: 140px;color: red;float: left" id="chat-list">
+                <!--<a href="#" class="list-group-item">-->
+                <!--<h4 class="list-group-item-heading">帅鸽</h4>-->
+                <!--<p class="list-group-item-text text-muted">共12个新条目</p>-->
+                <!--</a>-->
+            </div>
+            <div class="panel" style="float: left;width: 820px;margin-left: 8px; display: none">
+                <div class="panel-body">
+                    <div id="msgList" class="scrollbar-hover"
+                         style="max-height: 500px; min-height: 500px; overflow: scroll;">
+                        <!--<div class="panel panel-default" style="margin-bottom: 1px">-->
+                        <!--<div class="panel-heading">2019/12/09 20:00:03 <b>帅鸽</b>：</div>-->
+                        <!--<div class="panel-body">-->
+                        <!--我来了老弟-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <hr>
+                <div class="row" style="margin-left: 6px;margin-bottom: 10px;">
+                    <div class="col-xs-10">
+                        <textarea class="form-control" rows="3" placeholder="输入要发送的消息" id="singleMsg"></textarea>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-success" style="width: 100px" type="button" id="send-single">发送</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="panel panel-info" style="width: 1000px;margin: 0 auto;display: none" id="room-chat-panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">多对多聊天室</h3>
+    </div>
+    <div class="panel-body" style="text-align: center">
+        <span class="label">公共聊天室</span>
+        <div class="panel" style="margin-top: 5px; text-align: left">
+            <div class="panel-body">
+                <div id="roomMsgList" class="scrollbar-hover"
+                     style="max-height: 500px; min-height: 500px; overflow: scroll;">
+                    <!--<div class="panel panel-default" style="margin-bottom: 1px">-->
+                    <!--<div class="panel-heading">2019/12/09 20:00:03 <b>帅鸽</b>：</div>-->
+                    <!--<div class="panel-body">-->
+                    <!--我来了老弟-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="margin-left: 6px;margin-bottom: 10px;">
+            <div class="col-xs-10">
+                <textarea class="form-control" rows="3" placeholder="输入要发送的消息" id="roomMsg"></textarea>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-success" style="width: 100px" type="button" id="send-room">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-info" style="width: 1000px;margin: 0 auto;display: none" id="call-panel">
+    <div class="panel-heading">
+        <h3 class="panel-title">呼叫用户</h3>
+    </div>
+    <div class="panel-body">
+        <div style="width: 500px;margin: 10px auto;">
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class="input-control search-box has-icon-left has-icon-right has-warning" id="search-box">
+                        <input id="search-input" type="search" class="form-control search-input" placeholder="搜索用户">
+                        <label for="search-input" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+                        <a href="#" class="input-control-icon-right search-clear-btn"><i class="icon icon-remove"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <button class="btn btn-success" style="width: 100px" type="button" id="search">确定</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <table id="search-table" class="table table-hover table-fixed" style="text-align: left;display: none">
+            <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>用户名</th>
+                <th>上线时间</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="search-list">
+            <!--<tr>-->
+                <!--<td>484864864</td>-->
+                <!--<td>帅鸽</td>-->
+                <!--<td>2019/12/11 15:01:03</td>-->
+                <!--<td>在线</td>-->
+                <!--<td>-->
+                    <!--<button class="btn btn-info" type="button" id="">呼叫</button>-->
+                <!--</td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+        <div style="text-align: center;margin-top: 20px;margin-bottom: 10px;color: red;display: none;" id="no-result">
+            未找到相关用户
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+
+<script content="text/javascript">
+
+    $(function () {
+        getUserInfo();
+        websocketInit();
+        websocketHandler();
+        loadUserList();
+        loadUserChatList();
+    })
+
+    var socket;
+
+    function websocketInit() {
+        if (typeof(WebSocket) == "undefined") {
+            console.log("您的浏览器不支持WebSocket");
+        } else {
+            //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
+            socket = new WebSocket(app.BASE_WS_URL + "/websocket/" + localStorage.getItem("uid"));
+        }
+
+    }
+
+    function websocketHandler() {
+        //连接打开事件
+        socket.onopen = function () {
+            console.log("Socket 已打开");
+        };
+        //获得消息事件
+        socket.onmessage = function (msg) {
+            console.log(msg.data);
+            //收到服务端消息，开始处理前端触发逻辑
+            handlerMsg(msg.data)
+        };
+        //连接关闭事件
+        socket.onclose = function () {
+            console.log("WebSocket已关闭");
+        };
+        //发生错误事件
+        socket.onerror = function () {
+            alert("WebSocket发生了错误");
+            //此时可以尝试刷新页面
+        }
+        //离开页面时，关闭socket
+        //jquery1.8中已经被废弃，3.0中已经移除
+        // $(window).unload(function(){
+        //     socket.close();
+        //});
+    }
+
+
+    //处理接收到的消息
+    function handlerMsg(msgData) {
+        msgData = JSON.parse(msgData);
+        if (msgData.type == app.SINGLE) {
+            handlerSingleMsg(msgData);
+        }
+
+        if (msgData.type == app.ROOM) {
+            handlerRoomMsg(msgData);
+        }
+
+        if (msgData.type == app.STATUS_CHANGE) {
+            loadUserList();
+            show_info_box(msgData.content);
+        }
+
+        if (msgData.type == app.CALL){
+            handlerCall(msgData);
+        }
+
+        if (msgData.type == app.CALL_REPLY){
+            handlerCallReply(msgData);
+        }
+    }
+
+</script>
+</body>
+</html>

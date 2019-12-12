@@ -1,0 +1,10 @@
+#chat-list p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /*文本不换行，这样超出一行的部分被截取，显示...*/
+}
+
+.table th, .table td {
+    /*text-align: center;*/
+    vertical-align: middle;
+}

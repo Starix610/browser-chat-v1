@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+serverUrl: http://localhost:${server.port}
+
+# DataSource
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    #    schema: classpath:db/schema-h2.sql
+    #    data: classpath:db/data-h2.sql
+    url: jdbc:mysql://localhost:3306/kcsj_browser_chat?characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    username: root
+    password: 6467

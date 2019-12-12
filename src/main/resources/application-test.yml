@@ -1,0 +1,14 @@
+server:
+  port: 9020
+
+serverUrl: http://139.196.102.109:${server.port}
+
+# DataSource
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    #    schema: classpath:db/schema-h2.sql
+    #    data: classpath:db/data-h2.sql
+    url: jdbc:mysql://139.196.102.109:3306/kcsj_browser_chat?characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    username: root
+    password: 646722
